@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VITALITY GYM | あなたの理想のカラダへ</title>
+  <meta name="description" content="栃木最大級のパーソナルジム。AI搭載トレーニングプログラムで最短で理想の体型を実現。初回体験無料。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#fef3e2', 100:'#fde4b9', 200:'#fbc96f', 300:'#f9ad2a', 400:'#f59e0b', 500:'#e68a00', 600:'#c27200', 700:'#8f5400', 800:'#5c3600', 900:'#2e1b00' },
+            dark: { 50:'#f5f5f6', 100:'#e6e6e8', 200:'#d0d0d4', 300:'#b1b1b8', 400:'#8b8b94', 500:'#6e6e78', 600:'#5c5c65', 700:'#4d4d55', 800:'#434349', 900:'#18181b', 950:'#09090b' }
+          },
+          fontFamily: {
+            sans: ['Noto Sans JP', 'Inter', 'sans-serif'],
+            heading: ['Inter', 'Noto Sans JP', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .hero-gradient { background: linear-gradient(135deg, #09090b 0%, #1a1a2e 50%, #09090b 100%); }
+    .glow-brand { box-shadow: 0 0 30px rgba(245, 158, 11, 0.3); }
+    .text-gradient { background: linear-gradient(135deg, #f59e0b, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .counter { font-variant-numeric: tabular-nums; }
+    @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 20px rgba(245,158,11,0.2); } 50% { box-shadow: 0 0 40px rgba(245,158,11,0.4); } }
+    .pulse-glow { animation: pulse-glow 2s infinite; }
+    .stat-card { background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.08); }
+    .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
+  </style>
+</head>
+<body class="bg-dark-950 text-white font-sans antialiased">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <a href="#" class="font-heading font-black text-xl sm:text-2xl tracking-tight">
+          VITALITY<span class="text-brand-400">GYM</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#features" class="text-sm text-dark-400 hover:text-white transition-colors">特徴</a>
+          <a href="#programs" class="text-sm text-dark-400 hover:text-white transition-colors">プログラム</a>
+          <a href="#results" class="text-sm text-dark-400 hover:text-white transition-colors">実績</a>
+          <a href="#pricing" class="text-sm text-dark-400 hover:text-white transition-colors">料金</a>
+          <a href="#cta" class="bg-brand-400 hover:bg-brand-500 text-dark-950 font-bold text-sm px-6 py-2.5 rounded-full transition-all hover:scale-105">無料体験</a>
+        </div>
+        <button id="menu-toggle" class="md:hidden p-2 text-dark-400 hover:text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden glass">
+      <div class="px-4 py-4 space-y-3">
+        <a href="#features" class="block text-dark-400 hover:text-white transition-colors">特徴</a>
+        <a href="#programs" class="block text-dark-400 hover:text-white transition-colors">プログラム</a>
+        <a href="#results" class="block text-dark-400 hover:text-white transition-colors">実績</a>
+        <a href="#pricing" class="block text-dark-400 hover:text-white transition-colors">料金</a>
+        <a href="#cta" class="block bg-brand-400 hover:bg-brand-500 text-dark-950 font-bold text-center px-6 py-3 rounded-full">無料体験</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-gradient relative min-h-screen flex items-center overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-400 rounded-full blur-[128px]"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-500 rounded-full blur-[100px]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="fade-in">
+          <div class="inline-flex items-center gap-2 bg-brand-400/10 border border-brand-400/20 rounded-full px-4 py-1.5 mb-6">
+            <span class="w-2 h-2 bg-brand-400 rounded-full animate-pulse"></span>
+            <span class="text-brand-400 text-sm font-medium">2026年 春キャンペーン実施中</span>
+          </div>
+          <h1 class="font-heading font-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-tight mb-6">
+            あなたの<br>
+            <span class="text-gradient">理想のカラダ</span>へ
+          </h1>
+          <p class="text-dark-400 text-lg sm:text-xl leading-relaxed mb-8 max-w-lg">
+            AI搭載パーソナルプログラムで、あなた専用のトレーニングメニューを作成。最短3ヶ月で理想の体型を実現します。
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#cta" class="bg-brand-400 hover:bg-brand-500 text-dark-950 font-bold text-lg px-8 py-4 rounded-full text-center transition-all hover:scale-105 pulse-glow">
+              初回体験<span class="font-black">無料</span>
+            </a>
+            <a href="#features" class="glass text-white font-semibold text-lg px-8 py-4 rounded-full text-center hover:bg-white/10 transition-all">
+              詳しく見る
+            </a>
+          </div>
+        </div>
+        <div class="fade-in hidden lg:block">
+          <div class="relative">
+            <div class="w-full aspect-[4/5] rounded-3xl bg-gradient-to-br from-dark-800 to-dark-900 border border-dark-700/50 overflow-hidden flex items-center justify-center">
+              <div class="text-center p-8">
+                <div class="text-8xl mb-4">💪</div>
+                <p class="text-dark-400 text-lg">TRANSFORM YOUR BODY</p>
+              </div>
+            </div>
+            <div class="absolute -bottom-6 -left-6 stat-card rounded-2xl p-4 flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-brand-400/20 flex items-center justify-center">
+                <span class="text-brand-400 text-xl">🏆</span>
+              </div>
+              <div>
+                <p class="text-2xl font-black counter">2,400+</p>
+                <p class="text-dark-400 text-xs">会員数</p>
+              </div>
+            </div>
+            <div class="absolute -top-4 -right-4 stat-card rounded-2xl p-4 flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                <span class="text-green-400 text-xl">✓</span>
+              </div>
+              <div>
+                <p class="text-2xl font-black counter">96.8%</p>
+                <p class="text-dark-400 text-xs">継続率</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+      <span class="text-xs tracking-widest text-dark-400">SCROLL</span>
+      <div class="w-px h-8 bg-gradient-to-b from-dark-400 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="relative z-10 -mt-1 bg-dark-900/80 backdrop-blur-xl border-y border-dark-700/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center fade-in">
+          <p class="text-3xl sm:text-4xl font-black text-gradient counter" data-target="2400">0</p>
+          <p class="text-dark-400 text-sm mt-1">会員数</p>
+        </div>
+        <div class="text-center fade-in">
+          <p class="text-3xl sm:text-4xl font-black text-gradient counter" data-target="96">0</p>
+          <p class="text-dark-400 text-sm mt-1">継続率（%）</p>
+        </div>
+        <div class="text-center fade-in">
+          <p class="text-3xl sm:text-4xl font-black text-gradient counter" data-target="15">0</p>
+          <p class="text-dark-400 text-sm mt-1">トレーナー数</p>
+        </div>
+        <div class="text-center fade-in">
+          <p class="text-3xl sm:text-4xl font-black text-gradient counter" data-target="8">0</p>
+          <p class="text-dark-400 text-sm mt-1">年の実績</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-20 sm:py-28 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <p class="text-brand-400 font-semibold text-sm tracking-widest mb-3">FEATURES</p>
+        <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4">選ばれる<span class="text-gradient">3つの理由</span></h2>
+        <p class="text-dark-400 text-lg max-w-2xl mx-auto">他のジムとは違う、VITALITY GYMだけの強み。</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-8 card-hover fade-in">
+          <div class="w-14 h-14 rounded-2xl bg-brand-400/10 flex items-center justify-center mb-6">
+            <span class="text-3xl">🤖</span>
+          </div>
+          <h3 class="font-heading font-bold text-xl mb-3">AI搭載プログラム</h3>
+          <p class="text-dark-400 leading-relaxed">体組成データ・生活習慣・目標からAIが最適なトレーニングメニューを自動生成。毎週進捗に応じてアップデート。</p>
+        </div>
+        <div class="glass rounded-2xl p-8 card-hover fade-in">
+          <div class="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center mb-6">
+            <span class="text-3xl">👤</span>
+          </div>
+          <h3 class="font-heading font-bold text-xl mb-3">完全マンツーマン</h3>
+          <p class="text-dark-400 leading-relaxed">全セッションが1対1の完全パーソナル。あなたのペースに合わせた指導で、無理なく確実に結果を出します。</p>
+        </div>
+        <div class="glass rounded-2xl p-8 card-hover fade-in">
+          <div class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6">
+            <span class="text-3xl">🍽️</span>
+          </div>
+          <h3 class="font-heading font-bold text-xl mb-3">食事管理サポート</h3>
+          <p class="text-dark-400 leading-relaxed">専属栄養士がLINEで食事をチェック。写真を送るだけで、カロリーと栄養バランスをAIが即時分析します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs -->
+  <section id="programs" class="py-20 sm:py-28 px-4 bg-dark-900/30">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <p class="text-brand-400 font-semibold text-sm tracking-widest mb-3">PROGRAMS</p>
+        <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4">目的に合わせた<span class="text-gradient">プログラム</span></h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="glass rounded-2xl overflow-hidden card-hover fade-in group">
+          <div class="h-48 bg-gradient-to-br from-brand-400/20 to-orange-500/20 flex items-center justify-center">
+            <span class="text-6xl group-hover:scale-110 transition-transform">🔥</span>
+          </div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <h3 class="font-heading font-bold text-xl">ダイエットプログラム</h3>
+              <span class="text-xs bg-brand-400/10 text-brand-400 px-3 py-1 rounded-full">人気No.1</span>
+            </div>
+            <p class="text-dark-400 leading-relaxed mb-4">3ヶ月で平均-8kg。無理な食事制限なし。有酸素と筋トレの最適バランスで、リバウンドしにくい体を作ります。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">3ヶ月〜</span>
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">週2回</span>
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">食事指導付き</span>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl overflow-hidden card-hover fade-in group">
+          <div class="h-48 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center">
+            <span class="text-6xl group-hover:scale-110 transition-transform">💎</span>
+          </div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <h3 class="font-heading font-bold text-xl">ボディメイクプログラム</h3>
+            </div>
+            <p class="text-dark-400 leading-relaxed mb-4">理想のシルエットを作る本格プログラム。部位別の集中トレーニングで、メリハリのあるボディラインを実現。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">4ヶ月〜</span>
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">週3回</span>
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">プロテイン付き</span>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl overflow-hidden card-hover fade-in group">
+          <div class="h-48 bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center">
+            <span class="text-6xl group-hover:scale-110 transition-transform">🧘</span>
+          </div>
+          <div class="p-8">
+            <h3 class="font-heading font-bold text-xl mb-3">健康増進プログラム</h3>
+            <p class="text-dark-400 leading-relaxed mb-4">運動習慣がない方でも安心。ストレッチと軽負荷トレーニングで、基礎体力の向上と生活習慣の改善を目指します。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">2ヶ月〜</span>
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">週1〜2回</span>
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">初心者歓迎</span>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl overflow-hidden card-hover fade-in group">
+          <div class="h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+            <span class="text-6xl group-hover:scale-110 transition-transform">⚡</span>
+          </div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <h3 class="font-heading font-bold text-xl">パフォーマンスプログラム</h3>
+              <span class="text-xs bg-purple-500/10 text-purple-400 px-3 py-1 rounded-full">NEW</span>
+            </div>
+            <p class="text-dark-400 leading-relaxed mb-4">アスリート・スポーツ愛好家向け。競技特性に応じた専門トレーニングで、パフォーマンスを最大化します。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">3ヶ月〜</span>
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">週3〜4回</span>
+              <span class="text-xs bg-dark-800 text-dark-300 px-3 py-1 rounded-full">競技対応</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results / Testimonials -->
+  <section id="results" class="py-20 sm:py-28 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <p class="text-brand-400 font-semibold text-sm tracking-widest mb-3">RESULTS</p>
+        <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4">会員の<span class="text-gradient">変化</span></h2>
+        <p class="text-dark-400 text-lg">実際に通っている会員の声をご紹介します。</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-8 card-hover fade-in">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="text-brand-400">★★★★★</span>
+          </div>
+          <p class="text-dark-300 leading-relaxed mb-6">"3ヶ月で-10kg達成！AIが自分に合ったメニューを考えてくれるから、無理なく続けられました。食事管理も丁寧で、今では食事の知識もついた。"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-400/20 flex items-center justify-center">
+              <span class="text-sm font-bold text-brand-400">T</span>
+            </div>
+            <div>
+              <p class="font-semibold text-sm">田中さん（30代女性）</p>
+              <p class="text-dark-500 text-xs">ダイエットプログラム</p>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-8 card-hover fade-in">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="text-brand-400">★★★★★</span>
+          </div>
+          <p class="text-dark-300 leading-relaxed mb-6">"仕事が忙しくて週2しか通えないけど、しっかり結果が出てる。トレーナーさんが毎回的確なアドバイスをくれるので、モチベーションが下がらない。"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-sm font-bold text-blue-400">S</span>
+            </div>
+            <div>
+              <p class="font-semibold text-sm">佐藤さん（40代男性）</p>
+              <p class="text-dark-500 text-xs">ボディメイクプログラム</p>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-8 card-hover fade-in">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="text-brand-400">★★★★★</span>
+          </div>
+          <p class="text-dark-300 leading-relaxed mb-6">"運動経験ゼロでしたが、丁寧に教えてもらえるので安心。LINEで食事の写真送ると、すぐにフィードバックが返ってくるのがすごい。"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-sm font-bold text-green-400">M</span>
+            </div>
+            <div>
+              <p class="font-semibold text-sm">山田さん（20代女性）</p>
+              <p class="text-dark-500 text-xs">健康増進プログラム</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-20 sm:py-28 px-4 bg-dark-900/30">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <p class="text-brand-400 font-semibold text-sm tracking-widest mb-3">PRICING</p>
+        <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4">シンプルな<span class="text-gradient">料金プラン</span></h2>
+        <p class="text-dark-400 text-lg">すべてのプランに初回無料体験付き。</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="glass rounded-2xl p-8 card-hover fade-in">
+          <h3 class="font-heading font-bold text-lg mb-1">ライト</h3>
+          <p class="text-dark-500 text-sm mb-6">週1回ペースで無理なく</p>
+          <p class="mb-6">
+            <span class="text-4xl font-black">¥19,800</span>
+            <span class="text-dark-500 text-sm">/月</span>
+          </p>
+          <ul class="space-y-3 mb-8 text-sm">
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> パーソナルセッション 月4回</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> AIプログラム作成</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> 食事アドバイス</li>
+            <li class="flex items-center gap-2 text-dark-500"><span class="text-dark-600">−</span> LINE食事管理</li>
+          </ul>
+          <a href="#cta" class="block w-full text-center glass text-white font-semibold py-3 rounded-full hover:bg-white/10 transition-all">選ぶ</a>
+        </div>
+        <div class="relative glass rounded-2xl p-8 card-hover fade-in border-brand-400/30">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-400 text-dark-950 font-bold text-xs px-4 py-1 rounded-full">おすすめ</div>
+          <h3 class="font-heading font-bold text-lg mb-1">スタンダード</h3>
+          <p class="text-dark-500 text-sm mb-6">一番人気のバランスプラン</p>
+          <p class="mb-6">
+            <span class="text-4xl font-black text-gradient">¥34,800</span>
+            <span class="text-dark-500 text-sm">/月</span>
+          </p>
+          <ul class="space-y-3 mb-8 text-sm">
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> パーソナルセッション 月8回</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> AIプログラム作成</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> 食事アドバイス</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> LINE食事管理</li>
+          </ul>
+          <a href="#cta" class="block w-full text-center bg-brand-400 hover:bg-brand-500 text-dark-950 font-bold py-3 rounded-full transition-all hover:scale-105">選ぶ</a>
+        </div>
+        <div class="glass rounded-2xl p-8 card-hover fade-in">
+          <h3 class="font-heading font-bold text-lg mb-1">プレミアム</h3>
+          <p class="text-dark-500 text-sm mb-6">最速で結果を出したい方</p>
+          <p class="mb-6">
+            <span class="text-4xl font-black">¥54,800</span>
+            <span class="text-dark-500 text-sm">/月</span>
+          </p>
+          <ul class="space-y-3 mb-8 text-sm">
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> パーソナルセッション 月12回</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> AIプログラム作成</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> 食事アドバイス</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> LINE食事管理</li>
+            <li class="flex items-center gap-2 text-dark-300"><span class="text-brand-400">✓</span> サプリメント込み</li>
+          </ul>
+          <a href="#cta" class="block w-full text-center glass text-white font-semibold py-3 rounded-full hover:bg-white/10 transition-all">選ぶ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 sm:py-28 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <p class="text-brand-400 font-semibold text-sm tracking-widest mb-3">FAQ</p>
+        <h2 class="font-heading font-black text-3xl sm:text-4xl mb-4">よくある質問</h2>
+      </div>
+      <div class="space-y-4">
+        <details class="glass rounded-2xl group fade-in">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+            <span class="font-semibold">運動経験がなくても大丈夫ですか？</span>
+            <span class="text-brand-400 text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-dark-400 leading-relaxed">はい、まったく問題ありません。会員の約40%が運動未経験からスタートしています。AIがあなたの体力レベルに合わせたメニューを作成し、トレーナーが丁寧にフォームを指導します。</div>
+        </details>
+        <details class="glass rounded-2xl group fade-in">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+            <span class="font-semibold">入会金はかかりますか？</span>
+            <span class="text-brand-400 text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-dark-400 leading-relaxed">通常入会金は33,000円ですが、無料体験後の即日入会で0円になります。また、春のキャンペーン期間中は入会金が全額無料です。</div>
+        </details>
+        <details class="glass rounded-2xl group fade-in">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+            <span class="font-semibold">予約のキャンセルはできますか？</span>
+            <span class="text-brand-400 text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-dark-400 leading-relaxed">セッション開始の12時間前まで無料でキャンセル・変更が可能です。LINEから簡単に手続きできます。</div>
+        </details>
+        <details class="glass rounded-2xl group fade-in">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+            <span class="font-semibold">どのくらいで効果が出ますか？</span>
+            <span class="text-brand-400 text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-dark-400 leading-relaxed">個人差はありますが、多くの方が2週間で体の変化を実感し、3ヶ月で目に見える結果を得ています。AIプログラムが進捗に応じて最適化するので、効率よく結果を出せます。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" class="py-20 sm:py-28 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-400 rounded-full blur-[200px]"></div>
+    </div>
+    <div class="max-w-4xl mx-auto text-center relative z-10 fade-in">
+      <p class="text-brand-400 font-semibold text-sm tracking-widest mb-4">START TODAY</p>
+      <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-6">まずは<span class="text-gradient">無料体験</span>から</h2>
+      <p class="text-dark-400 text-lg max-w-2xl mx-auto mb-10">
+        カウンセリング + 体組成測定 + パーソナルトレーニング1回を完全無料で体験できます。<br>強引な勧誘は一切ありません。
+      </p>
+      <form class="max-w-md mx-auto space-y-4" onsubmit="event.preventDefault(); this.querySelector('button').textContent='送信完了！'; this.querySelector('button').classList.add('bg-green-500'); this.querySelector('button').classList.remove('bg-brand-400', 'hover:bg-brand-500');">
+        <input type="text" placeholder="お名前" required class="w-full px-6 py-4 rounded-full bg-dark-900 border border-dark-700 text-white placeholder-dark-500 focus:border-brand-400 focus:outline-none focus:ring-1 focus:ring-brand-400 text-base">
+        <input type="tel" placeholder="電話番号" required class="w-full px-6 py-4 rounded-full bg-dark-900 border border-dark-700 text-white placeholder-dark-500 focus:border-brand-400 focus:outline-none focus:ring-1 focus:ring-brand-400 text-base">
+        <input type="email" placeholder="メールアドレス" required class="w-full px-6 py-4 rounded-full bg-dark-900 border border-dark-700 text-white placeholder-dark-500 focus:border-brand-400 focus:outline-none focus:ring-1 focus:ring-brand-400 text-base">
+        <select class="w-full px-6 py-4 rounded-full bg-dark-900 border border-dark-700 text-dark-500 focus:border-brand-400 focus:outline-none focus:ring-1 focus:ring-brand-400 text-base appearance-none">
+          <option>希望プログラムを選択</option>
+          <option>ダイエットプログラム</option>
+          <option>ボディメイクプログラム</option>
+          <option>健康増進プログラム</option>
+          <option>パフォーマンスプログラム</option>
+        </select>
+        <button type="submit" class="w-full bg-brand-400 hover:bg-brand-500 text-dark-950 font-bold text-lg py-4 rounded-full transition-all hover:scale-105 pulse-glow">
+          無料体験に申し込む
+        </button>
+      </form>
+      <p class="text-dark-600 text-xs mt-4">※ 30秒で完了。しつこい勧誘はありません。</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-800 py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <p class="font-heading font-black text-xl mb-3">VITALITY<span class="text-brand-400">GYM</span></p>
+          <p class="text-dark-500 text-sm leading-relaxed">AIとトレーナーの力で、あなたの理想のカラダを実現するパーソナルジム。</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-3 text-sm">営業時間</p>
+          <p class="text-dark-500 text-sm">平日 7:00 - 23:00</p>
+          <p class="text-dark-500 text-sm">土日祝 8:00 - 21:00</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-3 text-sm">お問い合わせ</p>
+          <p class="text-dark-500 text-sm">TEL: 028-XXX-XXXX</p>
+          <p class="text-dark-500 text-sm">MAIL: info@vitality-gym.example.com</p>
+        </div>
+      </div>
+      <div class="border-t border-dark-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-dark-600 text-xs">&copy; 2026 VITALITY GYM. All rights reserved.</p>
+        <p class="text-dark-700 text-xs">※ これはデモサイトです。実在するジムではありません。</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-dark-950/90', 'backdrop-blur-xl', 'border-b', 'border-dark-800/50');
+      } else {
+        navbar.classList.remove('bg-dark-950/90', 'backdrop-blur-xl', 'border-b', 'border-dark-800/50');
+      }
+    });
+
+    // Mobile menu
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.add('hidden');
+      });
+    });
+
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Counter animation
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          if (!target) return;
+          let current = 0;
+          const increment = target / 60;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              el.textContent = target.toLocaleString() + (target > 100 ? '+' : target === 96 ? '%' : '');
+              clearInterval(timer);
+            } else {
+              el.textContent = Math.floor(current).toLocaleString();
+            }
+          }, 16);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+  </script>
+</body>
+</html>
